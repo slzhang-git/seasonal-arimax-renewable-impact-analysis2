@@ -56,7 +56,7 @@ class SARIMAX_SGD(SARIMAX_Base):
         self.preds_in_sample = None
         self.raw_preds_in_sample = None
 
-    def fit(self, loss="squared_loss", *, penalty="l2", alpha=0.0001,
+    def fit(self, loss="squared_error", *, penalty="l2", alpha=0.0001,
             l1_ratio=0.15, trend="n", max_iter=20_000, tol=None, shuffle=False,
             verbose=0, epsilon=0.1, random_state=None,
             learning_rate="invscaling", eta0=0.01, power_t=0.25,
