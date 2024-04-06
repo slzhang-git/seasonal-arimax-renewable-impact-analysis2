@@ -49,6 +49,8 @@ for id_, m_data in zip(ids, series_list):
     # Last 18 obs are for test
     h = 18
     endog = m_data[:-h]
+    Exog = np.column_stack((m_data[:-h], m_data[:-h]))
+    Exog1 = [m_data[len(m_data)-h:],m_data[len(m_data)-h:]]
 
     # Pmd for auto detection of orders
     pmd = pmdarima.auto_arima(endog, m=12, with_intercept=False,
@@ -73,10 +75,16 @@ for id_, m_data in zip(ids, series_list):
     fors_kf = tkf.forecast(h)
 
     # Statsmodels' (MLE with KF)
-    sta = sm.tsa.SARIMAX(endog, order=tkf.order, seasonal_order=tkf.seas_order)
+    sta = sm.tsa.SARIMAX(endog, exog=Exog, order=tkf.order, seasonal_order=tkf.seas_order)
     stafit = sta.fit(disp=0)
     preds_sta = stafit.predict()
-    fors_sta = stafit.forecast(h)
+    fors_sta = stafit.forecast(h, exog=Exog1)
+    #fors_sta = stafit.forecast(h)
+    y1=fors_sta
+    y2=m_data[len(m_data)-h:]
+    plt.plot(y1)
+    plt.plot(y2)
+    plt.show()
 
     # Plotting
     plot_ts(m_data[m * D + d:],
