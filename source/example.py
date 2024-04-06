@@ -63,16 +63,16 @@ for id_, m_data in zip(ids, series_list):
     print(f"\tOrder: {p, d, q}{P, D, Q, m}")
 
     # SGD way
-    sgd = SARIMAX_SGD(endog, order=(p, d, q), seas_order=(P, D, Q, m))
-    sfit = sgd.fit()
-    preds_sgd = sfit.predict_in_sample()
-    fors_sgd = sfit.forecast(h)
+    #sgd = SARIMAX_SGD(endog, order=(p, d, q), seas_order=(P, D, Q, m))
+    #sfit = sgd.fit()
+    #preds_sgd = sfit.predict_in_sample()
+    #fors_sgd = sfit.forecast(h)
 
     # Our Kalman Filter Impl
     tkf = SARIMAX_KF(endog, order=(p, d, q), seas_order=(P, D, Q, m))
-    tkfit = tkf.fit()
-    preds_kf = tkf.predict_in_sample()
-    fors_kf = tkf.forecast(h)
+    #tkfit = tkf.fit()
+    #preds_kf = tkf.predict_in_sample()
+    #fors_kf = tkf.forecast(h)
 
     # Statsmodels' (MLE with KF)
     sta = sm.tsa.SARIMAX(endog, exog=Exog, order=tkf.order, seasonal_order=tkf.seas_order)
