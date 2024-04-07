@@ -86,6 +86,8 @@ for id_, m_data in zip(ids, series_list):
     plt.plot(y2)
     plt.show()
 
+
+    '''
     # Plotting
     plot_ts(m_data[m * D + d:],
             np.r_[preds_sta[m * D + d:], fors_sta],
@@ -101,3 +103,4 @@ for id_, m_data in zip(ids, series_list):
     test_boundary = m_data.size - (m * D + d) - 1 - h
     plt.axvline(test_boundary, c="k", ls="--")
     plt.show()
+    '''
